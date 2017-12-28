@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>work4</title>
+</head>
+<body>
+<input id="num" type="text">
+<button id="left_in">左侧入</button>
+<button id="right_in">右侧入</button>
+<button id="left_out">左侧出</button>
+<button id="right_out">右侧出</button>
+<ul id="num_show">
+
+</ul>
+<script>
+    var num=document.getElementById("num");
+    var leftIn=document.getElementById("left_in");
+    var rightIn=document.getElementById("right_in");
+    var leftOut=document.getElementById("left_out");
+    var rightOut=document.getElementById("right_out");
+    var numList=document.getElementById("num_show");
+
+    function insertNum(direction) {
+        if(num.value==""){
+            alert("请输入一个数字");
+        }
+        if(!isNaN(num.value)){
+            var addLi=document.createElement("li");
+            addLi.innerHTML=num.value;
+           if (direction=="left"){
+               numList.insertBefore(addLi,numList.firstChild);
+           }
+           if (direction=="right"){
+               numList.appendChild(addLi);
+           }
+        }
+        else{
+            alert("请重新输入一个数字");
+        }
+    }
+    function  deleteNum(node,direction) {
+        if(numList.childNodes.length<=0){
+            alert("不存在数字可以删除");
+            return false;
+        }
+        else{
+            if (direction=="left"){
+                alert("删除数字:"+numList.firstChild.innerText);
+                numList.removeChild(numList.firstChild);
+            }
+            if(direction=="right"){
+                alert("删除数字："+numList.lastChild.innerText);
+                numList.removeChild(numList.lastChild);
+            }
+        }
+    }
+    left_in.onclick=function (){
+        insertNum("left");
+    };
+    right_in.onclick=function () {
+        insertNum("right");
+    };
+    left_out.onclick=function () {
+        deleteNum(-1,"left");
+    };
+    right_out.onclick=function () {
+        deleteNum(-1,"right");
+    };
+
+</script>
+</body>
+</html>
